@@ -1,0 +1,27 @@
+#Import Libraries to be used
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import json
+import os
+import requests
+
+%matplotlib inline
+
+# Download twitter-archive
+tw_arch = pd.read_csv('twitter-archive-enhanced.csv') 
+
+#Download tweet image predictions TSV using the Requests library and write it to image_predictions.tsv
+url = 'https://d17h27t6h515a5.cloudfront.net/topher/2017/August/599fd2ad_image-predictions/image-predictions.tsv'
+response = requests.get(url)
+
+#create file
+with open('image_predictions.tsv', mode='wb') as file:
+    file.write(response.content)
+    
+    
+    
+    #Import the file into pd .
+image_prediction = pd.read_csv('image_predictions.tsv', sep='\t')
